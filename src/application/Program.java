@@ -29,11 +29,12 @@ public class Program {
 		Integer months = sc.nextInt();
 		
 		Contract contract = new Contract(number, date, totalValue);
-		ContractService service = new ContractService(months, contract, new PaypalService());
+		ContractService service = new ContractService(new PaypalService());
 		
-		service.processContract(contract, months);
+		service.processContract(contract,months);
+		
 		System.out.println("Parcelas: ");	
-		for(Installment ints : contract.getInstallment()) {
+		for(Installment ints : contract.getInstallments()) {
 			System.out.printf("%s - %.2f%n",ints.getDueDate().format(dtf),ints.getAmount());
 		}
 
